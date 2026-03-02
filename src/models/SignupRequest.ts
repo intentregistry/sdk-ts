@@ -16,72 +16,63 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface User
+ * @interface SignupRequest
  */
-export interface User {
-    /**
-     * 
-     * @type {number}
-     * @memberof User
-     */
-    id: number;
+export interface SignupRequest {
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof SignupRequest
      */
     email: string;
     /**
      * 
      * @type {string}
-     * @memberof User
+     * @memberof SignupRequest
      */
-    name?: string;
+    password: string;
     /**
      * 
-     * @type {Date}
-     * @memberof User
+     * @type {string}
+     * @memberof SignupRequest
      */
-    createdAt: Date;
+    name?: string;
 }
 
 /**
- * Check if a given object implements the User interface.
+ * Check if a given object implements the SignupRequest interface.
  */
-export function instanceOfUser(value: object): value is User {
-    if (!('id' in value) || value['id'] === undefined) return false;
+export function instanceOfSignupRequest(value: object): value is SignupRequest {
     if (!('email' in value) || value['email'] === undefined) return false;
-    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('password' in value) || value['password'] === undefined) return false;
     return true;
 }
 
-export function UserFromJSON(json: any): User {
-    return UserFromJSONTyped(json, false);
+export function SignupRequestFromJSON(json: any): SignupRequest {
+    return SignupRequestFromJSONTyped(json, false);
 }
 
-export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User {
+export function SignupRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): SignupRequest {
     if (json == null) {
         return json;
     }
     return {
         
-        'id': json['id'],
         'email': json['email'],
+        'password': json['password'],
         'name': json['name'] == null ? undefined : json['name'],
-        'createdAt': (new Date(json['created_at'])),
     };
 }
 
-export function UserToJSON(value?: User | null): any {
+export function SignupRequestToJSON(value?: SignupRequest | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'id': value['id'],
         'email': value['email'],
+        'password': value['password'],
         'name': value['name'],
-        'created_at': ((value['createdAt']).toISOString()),
     };
 }
 

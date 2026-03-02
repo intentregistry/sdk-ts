@@ -2,5 +2,8 @@
 /* eslint-disable */
 export * from './AuthApi';
 export * from './HealthApi';
-export * from './IntentsApi';
-export * from './UsersApi';
+export * from './PackagesApi';
+export * from './RegistryGovernanceApi';
+export * from './RegistryIndexApi';
+export * from './ScopesApi';
+export * from './TrustedPublishingApi';
