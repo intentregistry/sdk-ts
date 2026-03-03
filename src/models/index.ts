@@ -11,4 +11,5 @@ export * from './HealthResponse';
 export * from './LoginRequest';
 export * from './Scope';
 export * from './SignupRequest';
+export * from './UpdateUserProfileRequest';
 export * from './User';

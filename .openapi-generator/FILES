@@ -9,6 +9,7 @@ src/apis/RegistryGovernanceApi.ts
 src/apis/RegistryIndexApi.ts
 src/apis/ScopesApi.ts
 src/apis/TrustedPublishingApi.ts
+src/apis/UsersApi.ts
 src/apis/index.ts
 src/index.ts
 src/models/AuthLogoutRequest.ts
@@ -22,6 +23,7 @@ src/models/HealthResponse.ts
 src/models/LoginRequest.ts
 src/models/Scope.ts
 src/models/SignupRequest.ts
+src/models/UpdateUserProfileRequest.ts
 src/models/User.ts
 src/models/index.ts
 src/runtime.ts

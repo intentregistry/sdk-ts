@@ -7,3 +7,4 @@ export * from './RegistryGovernanceApi';
 export * from './RegistryIndexApi';
 export * from './ScopesApi';
 export * from './TrustedPublishingApi';
+export * from './UsersApi';
