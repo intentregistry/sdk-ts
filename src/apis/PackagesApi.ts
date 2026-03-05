@@ -14,6 +14,19 @@
 
 
 import * as runtime from '../runtime';
+import type {
+  PackagesListResponse,
+} from '../models/index';
+import {
+    PackagesListResponseFromJSON,
+    PackagesListResponseToJSON,
+} from '../models/index';
+
+export interface ListPackagesRequest {
+    q?: string;
+    limit?: number;
+    offset?: number;
+}
 
 export interface ResolvePackageRequest {
     scope: string;
@@ -26,6 +39,77 @@ export interface ResolvePackageRequest {
  * 
  */
 export class PackagesApi extends runtime.BaseAPI {
+
+    /**
+     * Create package
+     */
+    async createPackageRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("bearerAuth", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/v1/packages`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Create package
+     */
+    async createPackage(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.createPackageRaw(initOverrides);
+    }
+
+    /**
+     * List public packages for catalog discovery
+     */
+    async listPackagesRaw(requestParameters: ListPackagesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PackagesListResponse>> {
+        const queryParameters: any = {};
+
+        if (requestParameters['q'] != null) {
+            queryParameters['q'] = requestParameters['q'];
+        }
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/v1/packages`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PackagesListResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * List public packages for catalog discovery
+     */
+    async listPackages(requestParameters: ListPackagesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PackagesListResponse> {
+        const response = await this.listPackagesRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      * Resolve package install target
