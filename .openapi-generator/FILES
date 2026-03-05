@@ -21,6 +21,9 @@ src/models/AuthSessionResponse.ts
 src/models/ErrorResponse.ts
 src/models/HealthResponse.ts
 src/models/LoginRequest.ts
+src/models/PackageListItem.ts
+src/models/PackagesListResponse.ts
+src/models/PackagesPagination.ts
 src/models/Scope.ts
 src/models/SignupRequest.ts
 src/models/UpdateUserProfileRequest.ts
